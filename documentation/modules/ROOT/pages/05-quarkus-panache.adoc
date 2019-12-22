@@ -6,13 +6,13 @@ include::_attributes.adoc[]
 
 At the end of this chapter you will be able to :
 
-* [x] What is Panache ?
-* [x] How to build a Hibernate application using Panache?
+* [x] Explain what Panache is and how it relates to the Hiberate Object Relational Mapper (ORM)
+* [x] Build a Hibernate application using Panache
 
 [#quarkusp-demo-overview]
 == Demo Overview 
 
-You'll learn how easy and productive is Quarkus with Hibernate with Panache. For this, we'll developer an application called "Fruits". It's a simple CRUD REST API that handles information about fruits.
+You'll learn how easy and productive Quarkus is with Hibernate and Panache.  For this, we'll develope an application called "Fruits".  It's a simple CRUD REST API that handles information about fruits.
 
 We'll use https://mariadb.org/[MariaDB] as our backing database.
 
@@ -367,9 +367,11 @@ public class Fruit extends PanacheEntity {
 ----
 copyToClipboard::quarkusp-fruit-entity2[]
 
-Making the `Fruit` entity as a `Panache Entity` will make it both Entity and DAO and ofcourse the error in the `FruitResource.java` disappears.
+Making the `Fruit` entity extend `Panache Entity` will make it both Entity and DAO which will resolve the error in the `FruitResource.java`.
 
-Lets now access the Fruits API http://localhost:8080/fruit. If all goes well you will see some Hibernate SQL statements in the log that will create the new table `Fruit` with columns from `Fruit.java` entity class.
+Let's now access the Fruits API http://localhost:8080/fruit. If all goes well you will see some Hibernate SQL statements in the log that will create the new table `Fruit` with columns from `Fruit.java` entity class.
+
+Since we don't have any fruits in the DB you would have got an empty response `[]` back. 
 
 [TIP]
 ====
@@ -385,9 +387,7 @@ copyToClipboard::qext-mvn-add-swagger-ui-extensions[]
 And then access the swagger UI using the url http://localhost:8080/swagger-ui.
 ====
 
-Since we don't have any fruits in the DB you would have got an empty response back. 
-
-Lets add a REST method to the `FruitResource.java` to save a 'Fruit':
+Let's add a REST method to the `FruitResource.java` to save a 'Fruit':
 
 [#quarkusp-fruit-add-persist]
 [source,java,subs="+macros,+attributes"]
@@ -580,7 +580,7 @@ Let's write a test to validate that inserting and finding methods works as expec
 [#quarkusp-testing-dep]
 ===== Adding AssertJ Dependency
 
-To validate simple output messages RestAssured assertions mechanism is enough but in our experience, when start dealing with more complex assertions then things might become a bit more complex. 
+To validate simple output messages RestAssured assertions mechanism is enough but in our experience, when one starts dealing with more complex assertions then things start to become a bit more complex. 
 For this reason, we encourage you to start using https://assertj.github.io/doc/[AssertJ].
 
 Open `$PROJECT_HOME/pom.xml` and add the next dependency in `dependencies` section:
@@ -600,7 +600,7 @@ copyToClipboard::quarkusp-register-assertj[]
 [#quarkusp-write-persistence-test]
 ===== Write Persistence Test 
 
-Open the next class `$PROJECT_HOME/src/test/java/com/example/FruitResourceTest.java` and copy the next content:
+Open the class `$PROJECT_HOME/src/test/java/com/example/FruitResourceTest.java` and replace *all* the content with the following:
 
 [#quarkusp-test-class]
 [source,java,subs="+macros"]
